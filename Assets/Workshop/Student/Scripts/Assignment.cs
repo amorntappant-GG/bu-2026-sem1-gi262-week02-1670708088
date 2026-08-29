@@ -10,7 +10,7 @@ namespace Assignment
     {
         public void Start()
         {
-            AS01_RandomItemDrop();
+            //AS01_RandomItemDrop();
             // AS02_NestedLoopForCreate2DMap();
             // AS03_NestedLoopForMakingWallAround();
             // AS04_AttackEnemy();
@@ -26,7 +26,7 @@ namespace Assignment
             // AS14_SumOfNumbersInColumn();
             // AS15_MakeTheTriangle();
             // AS16_MultiplicationTableOf_2_3_and_4();
-            // EX_01_TicTacToeGame_TurnPlay();
+             EX_01_TicTacToeGame_TurnPlay();
 
         }
 
@@ -46,69 +46,135 @@ namespace Assignment
         public GameObject[] as01_items;
         public void AS01_RandomItemDrop()
         {
-            throw new NotImplementedException();
+            if (as01_items == null || as01_items.Length == 0)
+            {
+                Debug.LogWarning("No items found.");
+                return;
+            }
+
+            int randomIndex = UnityEngine.Random.Range(0, as01_items.Length);
+            GameObject selectedItem = as01_items[randomIndex];
+
+            if (selectedItem == null)
+            {
+                Debug.LogWarning("Selected item is null.");
+                return;
+            }
+
+            GameObject go = Instantiate(
+                selectedItem,
+                transform.position,
+                transform.rotation
+            );
+
+            Debug.Log($"Got item: {go.name}");
         }
 
-        /*
-         * จงเขียนโปรแกรมใน Unity C# เพื่อสร้างแผนที่ 2D โดยใช้ Nested Loop
-         * กำหนดขนาด: กำหนดจำนวนคอลัมน์ (columns) และจำนวนแถว (rows) ของพื้นที่เล่น
-         * โดยกำหนดให้ มีตัวแปรดังนี้
-         * public int columns = 5;
-         * public int rows = 5;
-         *
-         * สร้างวัตถุแบบสุ่ม: เลือกวัตถุพื้น (floorTiles) จากอาร์เรย์แบบสุ่มในแต่ละตำแหน่ง โดยกำหนดให้ มีตัวแปรดังนี้
-         * public GameObject[] floorTiles;
-         *
-         * โดยที่เมื่อ program run ระบบจะกำหนดค่าใน array มาให้ 3 GameObject โดยแต่ละ GameObject มีชื่อดังนี้
-         * 1 แทนพื้นแบบที่ 1
-         * 2 แทนพื้นแบบที่ 2
-         * 0 แทนพื้นธรรมดา
-         *
-         * วางวัตถุ: วางวัตถุที่เลือกไว้ในตำแหน่งที่กำหนด โดยใช้ฟังก์ชัน Instantiate และกำหนดตำแหน่งผ่าน index ของ X Y ลงใน Vector2
-         * GameObject tile = Instantiate(obj, new Vector2(x, y), transform.rotation);
-         *
-         * และให้พิมพ์ชื่อของ GameObject tile ออกมาเพื่อแสดง pattern ของ map ที่ random สุ่มพื้นออกมาได้ ด้วย code
-         * Console.Write(tile.name);
-         *
-         * ตัวอย่างผลลัพธ์:
-         *
-         * Case 1: สร้าง map ขนาด 3x3 และสุ่มพื้นได้เป็น pattern
-         * Column ...
-         * 3
-         * Row ...
-         * 3
-         * 211
-         * 110
-         * 000
-         *
-         * Case 2: สร้าง map ขนาด 10x10 และสุ่มพื้นได้เป็น pattern
-         * Column ...
-         * 10
-         * Row ...
-         * 10
-         * 0100221122
-         * 2011120022
-         * 0210021000
-         * 2010112011
-         * 2001101221
-         * 0002200210
-         * 1221002122
-         * 2001102001
-         * 2200122110
-         * 1101112120
-         *
-         * พารามิเตอร์:
-         * - floorTiles: อาร์เรย์ของ GameObject พื้นแบบต่างๆ
-         * - columns: จำนวนคอลัมน์ของแผนที่
-         * - rows: จำนวนแถวของแผนที่
-         */
-        [Header("AS02_NestedLoopForCreate2DMap")]
+
+            /*
+             * จงเขียนโปรแกรมใน Unity C# เพื่อสร้างแผนที่ 2D โดยใช้ Nested Loop
+             * กำหนดขนาด: กำหนดจำนวนคอลัมน์ (columns) และจำนวนแถว (rows) ของพื้นที่เล่น
+             * โดยกำหนดให้ มีตัวแปรดังนี้
+             * public int columns = 5;
+             * public int rows = 5;
+             *
+             * สร้างวัตถุแบบสุ่ม: เลือกวัตถุพื้น (floorTiles) จากอาร์เรย์แบบสุ่มในแต่ละตำแหน่ง โดยกำหนดให้ มีตัวแปรดังนี้
+             * public GameObject[] floorTiles;
+             *
+             * โดยที่เมื่อ program run ระบบจะกำหนดค่าใน array มาให้ 3 GameObject โดยแต่ละ GameObject มีชื่อดังนี้
+             * 1 แทนพื้นแบบที่ 1
+             * 2 แทนพื้นแบบที่ 2
+             * 0 แทนพื้นธรรมดา
+             *
+             * วางวัตถุ: วางวัตถุที่เลือกไว้ในตำแหน่งที่กำหนด โดยใช้ฟังก์ชัน Instantiate และกำหนดตำแหน่งผ่าน index ของ X Y ลงใน Vector2
+             * GameObject tile = Instantiate(obj, new Vector2(x, y), transform.rotation);
+             *
+             * และให้พิมพ์ชื่อของ GameObject tile ออกมาเพื่อแสดง pattern ของ map ที่ random สุ่มพื้นออกมาได้ ด้วย code
+             * Console.Write(tile.name);
+             *
+             * ตัวอย่างผลลัพธ์:
+             *
+             * Case 1: สร้าง map ขนาด 3x3 และสุ่มพื้นได้เป็น pattern
+             * Column ...
+             * 3
+             * Row ...
+             * 3
+             * 211
+             * 110
+             * 000
+             *
+             * Case 2: สร้าง map ขนาด 10x10 และสุ่มพื้นได้เป็น pattern
+             * Column ...
+             * 10
+             * Row ...
+             * 10
+             * 0100221122
+             * 2011120022
+             * 0210021000
+             * 2010112011
+             * 2001101221
+             * 0002200210
+             * 1221002122
+             * 2001102001
+             * 2200122110
+             * 1101112120
+             *
+             * พารามิเตอร์:
+             * - floorTiles: อาร์เรย์ของ GameObject พื้นแบบต่างๆ
+             * - columns: จำนวนคอลัมน์ของแผนที่
+             * - rows: จำนวนแถวของแผนที่
+             */
+            [Header("AS02_NestedLoopForCreate2DMap")]
         public GameObject[] as02_floorTiles;
-        public int as02_columns;
-        public int as02_rows;
+        public int as02_columns = 5;
+        public int as02_rows = 5;
         public void AS02_NestedLoopForCreate2DMap()
         {
-            throw new NotImplementedException();
+
+            if (as02_floorTiles == null || as02_floorTiles.Length == 0)
+            {
+                Debug.LogWarning("No floor tiles found.");
+                return;
+            }
+
+            if (as02_columns <= 0 || as02_rows <= 0)
+            {
+                Debug.LogWarning("Columns and rows must be greater than zero.");
+                return;
+            }
+
+            StringBuilder mapPattern = new StringBuilder();
+
+            for (int y = 0; y < as02_rows; y++)
+            {
+                for (int x = 0; x < as02_columns; x++)
+                {
+                    int randomIndex = UnityEngine.Random.Range(
+                        0,
+                        as02_floorTiles.Length
+                    );
+
+                    GameObject selectedTile = as02_floorTiles[randomIndex];
+
+                    if (selectedTile == null)
+                    {
+                        continue;
+                    }
+
+                    GameObject tile = Instantiate(
+                        selectedTile,
+                        new Vector2(x, y),
+                        transform.rotation
+                    );
+
+                    string tileName = tile.name.Replace("(Clone)", "");
+                    mapPattern.Append(tileName);
+                }
+
+                mapPattern.AppendLine();
+            }
+
+            Debug.Log(mapPattern.ToString());
         }
 
         /*
@@ -198,11 +264,56 @@ namespace Assignment
          */
         [Header("AS03_NestedLoopForMakingWallAround")]
         public GameObject as03_wall;
-        public int as03_columns;
-        public int as03_rows;
+        public int as03_columns = 5;
+        public int as03_rows = 5;
         public void AS03_NestedLoopForMakingWallAround()
         {
-            throw new NotImplementedException();
+            if (as03_wall == null)
+            {
+                Debug.LogWarning("Wall prefab is missing.");
+                return;
+            }
+
+            if (as03_columns <= 0 || as03_rows <= 0)
+            {
+                Debug.LogWarning("Columns and rows must be greater than zero.");
+                return;
+            }
+
+            StringBuilder wallPattern = new StringBuilder();
+
+            // เริ่มจาก -1 และจบที่ columns / rows
+            // จึงทำให้กำแพงมีขนาดเพิ่มรอบละ 1 ช่อง
+            for (int y = -1; y <= as03_rows; y++)
+            {
+                for (int x = -1; x <= as03_columns; x++)
+                {
+                    bool isEdge =
+                        x == -1 ||
+                        x == as03_columns ||
+                        y == -1 ||
+                        y == as03_rows;
+
+                    if (isEdge)
+                    {
+                        Instantiate(
+                            as03_wall,
+                            new Vector2(x, y),
+                            transform.rotation
+                        );
+
+                        wallPattern.Append("*");
+                    }
+                    else
+                    {
+                        wallPattern.Append(" ");
+                    }
+                }
+
+                wallPattern.AppendLine();
+            }
+
+            Debug.Log(wallPattern.ToString());
         }
 
         /*
@@ -237,7 +348,41 @@ namespace Assignment
         public int as04_target;
         public void AS04_AttackEnemy()
         {
-            throw new NotImplementedException();
+            if (as04_enemyHP == null || as04_enemyHP.Length == 0)
+            {
+                Debug.Log("No enemies.");
+                return;
+            }
+            // รูปแบบที่ 1 : โจมตี Enemy ตัวแรก
+            // Index ตัวแรก = 0
+            as04_enemyHP[0] -= as04_damage;
+
+            Debug.Log(
+                $"FirstEnemy hp :{as04_enemyHP[0]}"
+            );
+            // รูปแบบที่ 2 : โจมตี Enemy ตัวสุดท้าย
+            // Index ตัวสุดท้าย = Length - 1
+            int lastIndex = as04_enemyHP.Length - 1;
+
+            as04_enemyHP[lastIndex] -= as04_damage;
+
+            Debug.Log(
+                $"LastEnemy hp :{as04_enemyHP[lastIndex]}");
+            // รูปแบบที่ 3 : โจมตี Enemy ตาม Target Index
+            if (
+                as04_target >= 0 &&
+                as04_target < as04_enemyHP.Length)
+            {
+                as04_enemyHP[as04_target] -= as04_damage;
+
+                Debug.Log(
+                    $"TargetEnemy {as04_target} hp :{as04_enemyHP[as04_target]}"
+                );
+            }
+            else
+            {
+                Debug.Log("Invalid target index.");
+            }
         }
 
         /*
@@ -260,7 +405,10 @@ namespace Assignment
         public int as05_n;
         public void AS05_DynamicIterationLoop()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < as05_n; i++)
+            {
+                Debug.Log(i);
+            }
         }
 
         /*
@@ -309,7 +457,41 @@ namespace Assignment
         public string[] as06_ironManSuitNames;
         public void AS06_WhileLoopAndArray()
         {
-            throw new NotImplementedException();
+            if (
+              as06_ironManSuitNames == null ||
+              as06_ironManSuitNames.Length == 0 )
+            {
+                Debug.Log("No Iron Man suits.");
+                return;
+            }        
+            // Log by One
+
+            Debug.Log("======Log by One======");
+
+            int i = 0;
+
+            while (i < as06_ironManSuitNames.Length)
+            {
+                // แสดงค่าตาม Index
+                Debug.Log(as06_ironManSuitNames[i]);
+
+                // เพิ่ม Index ทีละ 1
+                i += 1;
+            }
+            // Log by Two
+
+            Debug.Log("======Log by Two======");
+
+            i = 0;
+
+            while (i < as06_ironManSuitNames.Length)
+            {
+                // แสดง Index 0, 2, 4, 6
+                Debug.Log(as06_ironManSuitNames[i]);
+
+                // เพิ่ม Index ทีละ 2
+                i += 2;
+            }
         }
 
         /*
@@ -347,7 +529,40 @@ namespace Assignment
         public int as07_targetIndex;
         public void AS07_HealTargetAtIndex()
         {
-            throw new NotImplementedException();
+            if (
+               as07_heroHPs == null ||
+               as07_heroHPs.Length == 0)
+            {
+                Debug.Log("No heroes.");
+                return;
+            }
+            // รูปแบบที่ 1 : Heal ตัวแรก
+            as07_heroHPs[0] += as07_heal;
+
+            Debug.Log(
+                $"FirstHero hp :{as07_heroHPs[0]}"
+            );
+            // รูปแบบที่ 2 : Heal ตัวสุดท้าย
+            int lastIndex = as07_heroHPs.Length - 1;
+
+            as07_heroHPs[lastIndex] += as07_heal;
+
+            Debug.Log(
+                $"LastHero hp :{as07_heroHPs[lastIndex]}");
+            // รูปแบบที่ 3 : Heal Target
+            if (
+               as07_targetIndex >= 0 &&
+               as07_targetIndex < as07_heroHPs.Length)
+            {
+                as07_heroHPs[as07_targetIndex] += as07_heal;
+
+                Debug.Log(
+                    $"TargetHero {as07_targetIndex} hp :{as07_heroHPs[as07_targetIndex]}");
+            }
+            else
+            {
+                Debug.Log("Invalid target index.");
+            }
         }
 
         /*
@@ -374,7 +589,26 @@ namespace Assignment
         public string[] as08_dialogues;
         public void AS08_RandomPickingDialogue()
         {
-            throw new NotImplementedException();
+            if (
+               as08_dialogues == null ||
+               as08_dialogues.Length == 0
+           )
+            {
+                Debug.Log("No dialogues.");
+                return;
+            }
+
+            // สุ่ม Index ของ Dialogue
+            int r = UnityEngine.Random.Range(
+                0,
+                as08_dialogues.Length
+            );
+
+            // เอาข้อความจาก Array ตาม Index ที่สุ่มได้
+            string dialogue = as08_dialogues[r];
+
+            // แสดง Dialogue
+            Debug.Log(dialogue);
         }
 
         /*
@@ -400,7 +634,14 @@ namespace Assignment
         public int as09_n;
         public void AS09_MultiplicationTable()
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= 12; i++)
+            {
+                int result = as09_n * i;
+
+                Debug.Log(
+                    $"{as09_n}x{i}={result}"
+                );
+            }
         }
 
         /*
@@ -426,7 +667,21 @@ namespace Assignment
         public int as10_n;
         public void AS10_FindSummationFromZeroToNUsingWhileLoop()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            int i = 1;
+
+            // วนตั้งแต่ 1 ถึง n
+            while (i <= as10_n)
+            {
+                // เอา i มาบวกสะสมใน sum
+                sum += i;
+
+                // เพิ่ม i ทีละ 1
+                i++;
+            }
+
+            Debug.Log(
+                $"ผลรวมของ n จาก 1 ถึง {as10_n} คือ {sum}");
 
         }
 
@@ -453,7 +708,45 @@ namespace Assignment
         public GameObject as11_enemyPrefab;
         public void AS11_SpawnEnemies()
         {
-            throw new NotImplementedException();
+            if (
+               as11_enemyHPs == null ||
+               as11_enemyHPs.Length == 0
+           )
+            {
+                Debug.Log("No enemy HP data.");
+                return;
+            }
+
+            if (as11_enemyPrefab == null)
+            {
+                Debug.Log("Enemy prefab is not assigned.");
+                return;
+            }
+
+            // สร้าง Enemy ตามจำนวนสมาชิกใน Array
+            for (int i = 0; i < as11_enemyHPs.Length; i++)
+            {
+                // i = 0 -> x = 1
+                // i = 1 -> x = 2
+                // i = 2 -> x = 3
+                float xPosition = i + 1;
+
+                // สร้าง Enemy
+                GameObject enemy = Instantiate(
+                    as11_enemyPrefab,
+                    transform.position + new Vector3(
+                        xPosition,
+                        0,
+                        0
+                    ),
+                    transform.rotation
+                );
+
+                // แสดง HP ของ Enemy ที่นำมาใช้
+                Debug.Log(
+                    $"Spawn Enemy {i} HP : {as11_enemyHPs[i]}"
+                );
+            }
         }
 
         /*
@@ -466,7 +759,21 @@ namespace Assignment
         public float as12_countTime;
         public IEnumerator AS12_CountTime()
         {
-            throw new NotImplementedException();
+            float time = as12_countTime;
+
+            // ทำงานจนกว่าเวลาจะหมด
+            while (time > 0)
+            {
+                Debug.Log($"Time : {time}");
+
+                // รอ 1 วินาที
+                yield return new WaitForSeconds(1f);
+
+                // ลดเวลาลง 1
+                time--;
+            }
+
+            Debug.Log("Time's up!");
         }
 
         /*
@@ -524,7 +831,32 @@ namespace Assignment
         public void AS13_SumOfNumbersInRow()
         {
             var matrix = as13_matrix.Get2DArray();
-            throw new NotImplementedException();
+            // ตรวจสอบว่า Row ที่เลือกมีอยู่จริงหรือไม่
+            if (
+                as13_row < 0 ||
+                as13_row >= matrix.GetLength(0)
+            )
+            {
+                Debug.Log("Invalid row.");
+                return;
+            }
+
+            int sum = 0;
+
+            // วนตามจำนวน Column
+            for (
+                int column = 0;
+                column < matrix.GetLength(1);
+                column++
+            )
+            {
+                // เอาค่าของแต่ละช่องมาบวกกัน
+                sum += matrix[as13_row, column];
+            }
+
+            Debug.Log($"Row ...");
+            Debug.Log(as13_row);
+            Debug.Log(sum);
         }
 
         /*
@@ -580,7 +912,31 @@ namespace Assignment
         public void AS14_SumOfNumbersInColumn()
         {
             var matrix = as14_matrix.Get2DArray();
-            throw new NotImplementedException();
+            if (
+                as14_column < 0 ||
+                as14_column >= matrix.GetLength(1)
+            )
+            {
+                Debug.Log("Invalid column.");
+                return;
+            }
+
+            int sum = 0;
+
+            // วนตามจำนวน Row
+            for (
+                int row = 0;
+                row < matrix.GetLength(0);
+                row++
+            )
+            {
+                // เอาค่าของแต่ละ Row มาบวกกัน
+                sum += matrix[row, as14_column];
+            }
+
+            Debug.Log($"Col ...");
+            Debug.Log(as14_column);
+            Debug.Log(sum);
         }
 
         /*
@@ -630,7 +986,21 @@ namespace Assignment
         public int as15_size;
         public void AS15_MakeTheTriangle()
         {
-            throw new NotImplementedException();
+            // Loop ภายนอก = จำนวน Row
+            for (int i = 1; i <= as15_size; i++)
+            {
+                string line = "";
+
+                // Loop ภายใน = จำนวน *
+                // จำนวน * จะเท่ากับหมายเลข Row
+                for (int j = 1; j <= i; j++)
+                {
+                    line += "*";
+                }
+
+                // แสดงแต่ละ Row
+                Debug.Log(line);
+            }
         }
 
         /*
@@ -659,7 +1029,28 @@ namespace Assignment
          */
         public void AS16_MultiplicationTableOf_2_3_and_4()
         {
-            throw new NotImplementedException();
+            // ตัวคูณ 1 ถึง 12
+            for (int i = 1; i <= 12; i++)
+            {
+                string line = "";
+
+                // ตัวเลข 2, 3, 4
+                for (int number = 2; number <= 4; number++)
+                {
+                    // สร้างข้อความสูตรคูณ
+                    line += $"{number} x {i} = {number * i}";
+
+                    // ใส่ Tab เฉพาะระหว่าง Column
+                    // เพื่อไม่ให้มี \t ตอนท้ายบรรทัด
+                    if (number < 4)
+                    {
+                        line += "\t";
+                    }
+                }
+
+                // แสดงสูตรคูณ 1 บรรทัด
+                Debug.Log(line);
+            }
         }
 
         #endregion
@@ -882,7 +1273,149 @@ namespace Assignment
         public void EX_01_TicTacToeGame_TurnPlay()
         {
             var board = ex01_board.Get2DArray();
-            throw new NotImplementedException();
+            // 1. ตรวจสอบ Player
+            if (
+               ex01_playerTurn != "X" &&
+               ex01_playerTurn != "O")
+            {
+                Debug.Log("Invalid player.");
+                PrintBoard(board);
+                return;
+            }
+            // 2. ตรวจสอบตำแหน่งว่าอยู่ใน Board หรือไม่
+           
+            if (
+                ex01_row < 0 ||
+                ex01_row >= 3 ||
+                ex01_column < 0 ||
+                ex01_column >= 3
+            )
+            {
+                PrintBoard(board);
+                Debug.Log(">> Invalid move");
+                return;
+            }
+            // 3. ตรวจสอบว่าช่องว่างหรือไม่
+   
+            if (
+                !string.IsNullOrEmpty(
+                    board[ex01_row, ex01_column]
+                )
+            )
+            {
+                PrintBoard(board);
+                Debug.Log(">> Invalid move");
+                return;
+            }
+            // 4. ใส่ X หรือ O ลง Board
+
+            board[ex01_row, ex01_column] =
+                ex01_playerTurn;
+
+            // 5. แสดง Board หลังจากลง
+            
+            PrintBoard(board);
+
+            // 6. ตรวจสอบว่าผู้เล่นชนะหรือไม่
+
+            if (CheckWinner(board, ex01_playerTurn))
+            {
+                Debug.Log(
+                    $">> {ex01_playerTurn} Win!"
+                );
+
+                return;
+            }
+
+            // 7. ตรวจสอบว่า Board เต็มหรือยัง
+   
+            if (IsBoardFull(board))
+            {
+                Debug.Log(">> Draw");
+                return;
+            }
+
+            // 8. ถ้ายังไม่จบ ให้เล่นต่อ
+
+            Debug.Log(">> Continue");
+        }
+        // CheckWinner
+        // ตรวจสอบว่าผู้เล่นมี 3 ตัวเรียงกันหรือไม่
+
+        private bool CheckWinner(
+            string[,] board,
+            string player)
+        {
+            // ตรวจสอบ Row
+         
+            for (int row = 0; row < 3; row++)
+            {
+                if (
+                    board[row, 0] == player &&
+                    board[row, 1] == player &&
+                    board[row, 2] == player
+                )
+                {
+                    return true;
+                }
+            }
+
+            // ตรวจสอบ Column
+           
+            for (int column = 0; column < 3; column++)
+            {
+                if (
+                    board[0, column] == player &&
+                    board[1, column] == player &&
+                    board[2, column] == player
+                )
+                {
+                    return true;
+                }
+            }
+            // ตรวจสอบเส้นทแยงมุม 
+            if (
+                board[0, 0] == player &&
+                board[1, 1] == player &&
+                board[2, 2] == player
+            )
+            {
+                return true;
+            }
+            // ตรวจสอบเส้นทแยงมุม
+           
+            if (
+                board[0, 2] == player &&
+                board[1, 1] == player &&
+                board[2, 0] == player
+            )
+            {
+                return true;
+            }
+
+
+            // ไม่มีผู้ชนะ
+            return false;
+        }
+        // ตรวจสอบว่าทุกช่องบน Board ถูกใช้งานหมดแล้วหรือยัง
+        private bool IsBoardFull(string[,] board)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int column = 0; column < 3; column++)
+                {
+                    // ถ้ามีช่องว่าง แสดงว่า Board ยังไม่เต็ม
+                    if (string.IsNullOrEmpty(
+                        board[row, column]
+                    ))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            // ไม่มีช่องว่างแล้ว
+            return true;
         }
         #endregion
 

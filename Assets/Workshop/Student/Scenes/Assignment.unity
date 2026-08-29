@@ -164,9 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assignment.Assignment
   as01_items:
-  - {fileID: 6401792816642385161, guid: 8daba404af8ca2b449f79f2ef2325e42, type: 3}
-  - {fileID: 8352787512774635016, guid: 6d6ca20a8028f4948abbd0a9460d250f, type: 3}
-  - {fileID: 8100579626664158719, guid: c1fd18bc07765e94687daeaba77a29f5, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   as02_floorTiles:
   - {fileID: 8981274605333006497, guid: 93d0b3edf258c194ca8e4bdaedb3507d, type: 3}
   - {fileID: 5525326628935868067, guid: 42ae0a1037f220c46be78186c07b001e, type: 3}
@@ -181,32 +180,27 @@ MonoBehaviour:
   as04_enemyHP: 0a000000140000001e000000
   as04_damage: 5
   as04_target: 2
-  as05_n: 3
+  as05_n: 5
   as06_ironManSuitNames:
   - Mark I
   - Mark II
   - Mark III
   - Mark IV
-  - Mark V
-  - Mark VI
-  - Mark VII
   as07_heroHPs: 0a000000140000001e000000
   as07_heal: 5
   as07_targetIndex: 1
   as08_dialogues:
   - "\u0E04\u0E38\u0E13\u0E40\u0E1B\u0E47\u0E19\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E1A\u0E49\u0E32\u0E07\u0E04\u0E23\u0E31\u0E1A"
-  - "\u0E41\u0E25\u0E49\u0E27\u0E40\u0E08\u0E2D\u0E01\u0E31\u0E19\u0E43\u0E2B\u0E21\u0E48"
-  - "\u0E2A\u0E27\u0E31\u0E2A\u0E14\u0E35"
-  as09_n: 2
-  as10_n: 15
-  as11_enemyHPs: 0f0000001400000019000000
+  as09_n: 3
+  as10_n: 10
+  as11_enemyHPs: 0f00000014000000190000001900000019000000
   as11_enemyPrefab: {fileID: 8402306337599026408, guid: 750804a3353a1434ab71f408a13e1b58, type: 3}
   as12_countTime: 5
   as13_matrix:
     rows: 3
-    cols: 3
-    data: 010000000200000003000000040000000500000006000000070000000800000009000000
-  as13_row: 0
+    cols: 4
+    data: 010000000200000003000000050000000400000005000000060000000400000007000000080000000900000005000000
+  as13_row: 2
   as14_matrix:
     rows: 3
     cols: 3
@@ -220,13 +214,13 @@ MonoBehaviour:
     - X
     - X
     - O
+    - 
+    - 
+    - 
     - X
     - O
-    - X
-    - 
-    - ' '
-    - ' '
-  ex01_playerTurn: 1
+    - O
+  ex01_playerTurn: 3
   ex01_row: 0
   ex01_column: 2
 --- !u!1 &652921969
